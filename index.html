@@ -954,17 +954,30 @@ patient_id,age,gender,blood_pressure,cholesterol,bmi,smoking,outcome
             const loading = document.getElementById('predictionLoading');
             const results = document.getElementById('predictionResults');
             
+            // Validate form data first
+            const age = document.getElementById('age').value;
+            const gender = document.getElementById('gender').value;
+            const bloodPressure = document.getElementById('bloodPressure').value;
+            const cholesterol = document.getElementById('cholesterol').value;
+            const bmi = document.getElementById('bmi').value;
+            const smoking = document.getElementById('smoking').value;
+            
+            if (!age || !gender || !bloodPressure || !cholesterol || !bmi || !smoking) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            
             loading.style.display = 'block';
             results.innerHTML = '';
             
             // Collect form data
             const formData = {
-                age: parseInt(document.getElementById('age').value),
-                gender: document.getElementById('gender').value,
-                bloodPressure: parseInt(document.getElementById('bloodPressure').value),
-                cholesterol: parseInt(document.getElementById('cholesterol').value),
-                bmi: parseFloat(document.getElementById('bmi').value),
-                smoking: document.getElementById('smoking').value
+                age: parseInt(age),
+                gender: gender,
+                bloodPressure: parseInt(bloodPressure),
+                cholesterol: parseInt(cholesterol),
+                bmi: parseFloat(bmi),
+                smoking: smoking
             };
 
             // Simulate prediction processing
@@ -974,7 +987,6 @@ patient_id,age,gender,blood_pressure,cholesterol,bmi,smoking,outcome
                 loading.style.display = 'none';
             }, 2000);
         }
-
         function generatePrediction(data) {
             // Normalize data for prediction
             const normalizedData = [
